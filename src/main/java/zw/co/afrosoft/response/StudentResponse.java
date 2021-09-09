@@ -3,36 +3,23 @@ package zw.co.afrosoft.response;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+import zw.co.afrosoft.domain.Student;
 
-@AllArgsConstructor
+@Getter
+@Setter
 public class StudentResponse {
     @JsonIgnore
     private Long id;
-    @JsonProperty("first_name")
     private String firstname;
     private String lastname;
+    private String email;
 
-    public Long getId() {
-        return id;
+    public StudentResponse(Student student){
+        this.firstname= student.getFirstname();
+        this.lastname=student.getLastname();
+        this.email=student.getEmail();
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getFirstname() {
-        return firstname;
-    }
-
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
-    }
-
-    public String getLastname() {
-        return lastname;
-    }
-
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
-    }
 }

@@ -2,19 +2,15 @@ package zw.co.afrosoft.response;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AllArgsConstructor;
 
+@AllArgsConstructor
 public class StudentResponse {
     @JsonIgnore
     private Long id;
     @JsonProperty("first_name")
     private String firstname;
     private String lastname;
-
-    public StudentResponse(Long id, String firstname, String lastname) {
-        this.id = id;
-        this.firstname = firstname;
-        this.lastname = lastname;
-    }
 
     public Long getId() {
         return id;

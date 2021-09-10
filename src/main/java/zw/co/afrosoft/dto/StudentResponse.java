@@ -1,8 +1,6 @@
-package zw.co.afrosoft.response;
+package zw.co.afrosoft.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import zw.co.afrosoft.domain.Student;

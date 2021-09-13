@@ -45,16 +45,24 @@ public class StudentController {
     }
 
     /* delete functionality using the RequestParam
+
     @DeleteMapping("/delete")
     public String deleteStudent(@RequestParam("id") Long id){
         return studentService.deleteStudent(id);
     }
-
      */
 
     @DeleteMapping("/delete/{id}")
     public String deleteStudent(@PathVariable("id") Long id){
         return studentService.deleteStudent(id);
+    }
+
+    @GetMapping("/getByfirstName/{firstname}")
+    public List<Student> getByFirstName(String firstname){
+        List<Student> studentList = studentService.getStudentByFirstname(firstname);
+        List<StudentResponse> studentResponseList = new ArrayList<>();
+        studentList.stream().forEach( student -> studentResponseList.add( new StudentResponse(student)));
+        return studentList;
     }
 
 }

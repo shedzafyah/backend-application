@@ -5,6 +5,8 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import zw.co.afrosoft.domain.Student;
 
-public interface StudentRepository extends JpaRepository<Student,Long> {
+import java.util.List;
 
+public interface StudentRepository extends JpaRepository<Student,Long> {
+    List<Student> findStudentByFirstname(String firstname);
 }

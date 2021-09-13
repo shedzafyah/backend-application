@@ -26,7 +26,7 @@ public class StudentService {
     }
     public Student updateStudent(UpdateStudentRequest updateStudentRequest){
         Student student = studentRepository.findById(updateStudentRequest.getId()).get();
-        if (updateStudentRequest.getFirstname().isEmpty() && updateStudentRequest.getFirstname()!=null){
+        if (!updateStudentRequest.getFirstname().isEmpty() && updateStudentRequest.getFirstname()!=null){
             student.setFirstname(updateStudentRequest.getFirstname());
         }
         student = studentRepository.save(student);

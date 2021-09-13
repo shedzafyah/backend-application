@@ -8,5 +8,10 @@ import zw.co.afrosoft.domain.Student;
 import java.util.List;
 
 public interface StudentRepository extends JpaRepository<Student,Long> {
+
     List<Student> findStudentByFirstname(String firstname);
+
+    List<Student> findStudentByFirstnameAndLastname(String firstname,String Lastname);
+
+    List<Student> findStudentByFirstnameIn(List<String> firstnames);
 }

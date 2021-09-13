@@ -3,6 +3,7 @@ package zw.co.afrosoft.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import zw.co.afrosoft.domain.Student;
+import zw.co.afrosoft.dto.InQueryRequest;
 import zw.co.afrosoft.dto.StudentRequest;
 import zw.co.afrosoft.dto.StudentResponse;
 import zw.co.afrosoft.dto.UpdateStudentRequest;
@@ -57,12 +58,31 @@ public class StudentController {
         return studentService.deleteStudent(id);
     }
 
-    @GetMapping("/getByfirstName/{firstname}")
-    public List<Student> getByFirstName(String firstname){
+    @GetMapping("/{firstname}")
+    public List<StudentResponse> getByFirstName(@PathVariable("firstname") String firstname){
         List<Student> studentList = studentService.getStudentByFirstname(firstname);
         List<StudentResponse> studentResponseList = new ArrayList<>();
         studentList.stream().forEach( student -> studentResponseList.add( new StudentResponse(student)));
-        return studentList;
+        return studentResponseList;
     }
 
+    @GetMapping("/{firstname}/{lastname}")
+    public List<StudentResponse> getByFirstNameAndLastName(@PathVariable String firstname, @PathVariable String lastname){
+        List<Student> studentList = studentService.getStudentByFirstnameAndLastname(firstname, lastname);
+        List<StudentResponse> studentResponseList = new ArrayList<>();
+        studentList.stream().forEach(student -> studentResponseList.add(new StudentResponse(student)));
+        return studentResponseList;
+    }
+
+    /*
+        AND & IN Query in JPA is Similar
+     */
+
+    @GetMapping("/getFirstnameIn")
+    public List<StudentResponse> getByFirstnameIn(@RequestBody InQueryRequest inQueryRequest){
+        List<Student> studentList = studentService.getStudentByFirstnameIn(inQueryRequest);
+        List<StudentResponse> studentResponseList = new ArrayList<>();
+        studentList.stream().forEach(student -> studentResponseList.add(new StudentResponse(student)));
+        return studentResponseList;
+    }
 }

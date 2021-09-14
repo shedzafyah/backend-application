@@ -5,11 +5,13 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import zw.co.afrosoft.domain.Address;
 import zw.co.afrosoft.domain.Student;
 import zw.co.afrosoft.dto.InQueryRequest;
 import zw.co.afrosoft.dto.StudentRequest;
 import zw.co.afrosoft.dto.StudentResponse;
 import zw.co.afrosoft.dto.UpdateStudentRequest;
+import zw.co.afrosoft.persistence.AddressRepository;
 import zw.co.afrosoft.persistence.StudentRepository;
 
 import java.util.ArrayList;
@@ -21,12 +23,20 @@ public class StudentService {
     @Autowired
    StudentRepository studentRepository;
 
+    @Autowired
+    AddressRepository addressRepository;
+
     public List<Student> getAllStudent(){
         return studentRepository.findAll();
     }
 
     public Student createStudent(StudentRequest studentRequest){
         Student student= new Student(studentRequest);
+        Address address = new Address();
+        address.setCity(studentRequest.getCity());
+        address.setStreet(studentRequest.getStreet());
+        addressRepository.save(address);
+        student.setAddress(address);
         studentRepository.save(student);
         return student;
     }
@@ -49,7 +59,7 @@ public class StudentService {
     }
 
     public List<Student> getStudentByFirstnameAndLastname(String firstname,String lastname){
-        return studentRepository.getByfirstNameAndLastname(firstname, lastname);
+        return studentRepository.getByFirstNameAndLastname(firstname, lastname);
     }
 
     public List<Student> getStudentByFirstnameIn(InQueryRequest inQueryRequest){

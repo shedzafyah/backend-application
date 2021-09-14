@@ -21,6 +21,9 @@ public class Student {
     private String firstname;
     private String lastname;
     private String email;
+    @OneToOne
+    @JoinColumn(name = "address_id")
+    private Address address;
     @Transient
     private String fullname;
 

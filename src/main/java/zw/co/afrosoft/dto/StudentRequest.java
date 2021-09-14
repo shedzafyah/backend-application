@@ -20,4 +20,8 @@ public class StudentRequest {
     @NotBlank(message = "email is reqiuired")
     private String email;
 
+    private String street;
+
+    private String city;
+
 }

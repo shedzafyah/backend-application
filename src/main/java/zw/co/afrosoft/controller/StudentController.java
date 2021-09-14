@@ -45,12 +45,19 @@ public class StudentController {
         return new StudentResponse(student);
     }
 
-    /* delete functionality using the RequestParam
+    /*
+
 
     @DeleteMapping("/delete")
     public String deleteStudent(@RequestParam("id") Long id){
         return studentService.deleteStudent(id);
     }
+     */
+
+
+    /*
+        delete?id={id} -- RequestParam
+        delete/{id} -- PathVariable
      */
 
     @DeleteMapping("/delete/{id}")
@@ -84,5 +91,13 @@ public class StudentController {
         List<StudentResponse> studentResponseList = new ArrayList<>();
         studentList.stream().forEach(student -> studentResponseList.add(new StudentResponse(student)));
         return studentResponseList;
+    }
+
+    @GetMapping("/getStudentWithPagination")
+    public List<StudentResponse> getAllStudentsWithPagination(@RequestParam int pageNo, @RequestParam int pageSize){
+        List<Student> studentList =studentService.getAllStudentWithPagination(pageNo,pageSize);
+        List<StudentResponse> studentResponseList = new ArrayList<>();
+         studentList.stream().forEach(student ->studentResponseList.add(new StudentResponse(student)));
+         return studentResponseList;
     }
 }

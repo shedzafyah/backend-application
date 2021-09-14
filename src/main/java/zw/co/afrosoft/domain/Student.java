@@ -21,6 +21,9 @@ public class Student {
     private String firstname;
     private String lastname;
     private String email;
+    @Transient
+    private String fullname;
+
 
     public Student(StudentRequest studentRequest){
         this.firstname= studentRequest.getFirst_name();

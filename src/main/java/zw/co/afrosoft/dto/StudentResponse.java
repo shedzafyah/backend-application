@@ -13,11 +13,13 @@ public class StudentResponse {
     private String firstname;
     private String lastname;
     private String email;
+    private String fullname;
 
     public StudentResponse(Student student){
         this.firstname= student.getFirstname();
         this.lastname=student.getLastname();
         this.email=student.getEmail();
+        this.fullname=student.getFirstname() + " " +student.getLastname();
     }
 
 }

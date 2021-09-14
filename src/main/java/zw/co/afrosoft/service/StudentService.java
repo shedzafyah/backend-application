@@ -3,6 +3,7 @@ package zw.co.afrosoft.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import zw.co.afrosoft.domain.Student;
 import zw.co.afrosoft.dto.InQueryRequest;
@@ -42,8 +43,13 @@ public class StudentService {
         return studentRepository.findStudentByFirstname(firstname);
     }
 
+    public List<Student> getStudentSorted(){
+        Sort sort = Sort.by(Sort.Direction.ASC,"firstname","lastname","email");
+        return studentRepository.findAll(sort);
+    }
+
     public List<Student> getStudentByFirstnameAndLastname(String firstname,String lastname){
-        return studentRepository.findStudentByFirstnameAndLastname(firstname,lastname);
+        return studentRepository.getByfirstNameAndLastname(firstname, lastname);
     }
 
     public List<Student> getStudentByFirstnameIn(InQueryRequest inQueryRequest){

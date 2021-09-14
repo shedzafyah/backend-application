@@ -1,6 +1,7 @@
 package zw.co.afrosoft.persistence;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import zw.co.afrosoft.domain.Student;
@@ -14,5 +15,13 @@ public interface StudentRepository extends JpaRepository<Student,Long> {
     List<Student> findStudentByFirstnameAndLastname(String firstname,String Lastname);
 
     List<Student> findStudentByFirstnameIn(List<String> firstnames);
+
+    @Query("FROM Student Where firstname=:firstname AND lastname=:lastname")
+    List<Student> getByFirstNameAndLastname(String firstname,String lastname);
+
+    /*
+        UPDATE
+        DELETE
+     */
 
 }

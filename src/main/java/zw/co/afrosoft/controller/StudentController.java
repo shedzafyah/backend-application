@@ -100,4 +100,17 @@ public class StudentController {
          studentList.stream().forEach(student ->studentResponseList.add(new StudentResponse(student)));
          return studentResponseList;
     }
+
+    @GetMapping("/getAllStudentSorted")
+    public List<StudentResponse> getStudentsSorted(){
+        List<Student> studentList = studentService.getStudentSorted();
+        List<StudentResponse> studentResponseList = new ArrayList<>();
+        studentList.stream().forEach(student -> studentResponseList.add(new StudentResponse(student)));
+        return studentResponseList;
+    }
+
+    /*
+        Like Statements
+        StartWith Query
+     */
 }

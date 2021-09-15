@@ -100,4 +100,12 @@ public class StudentController {
          studentList.stream().forEach(student ->studentResponseList.add(new StudentResponse(student)));
          return studentResponseList;
     }
+
+    @GetMapping("/getByCity")
+    public List<StudentResponse> getStudentsByCity(@RequestParam String city){
+        List<Student> studentList = studentService.getStudentByCity(city);
+        List<StudentResponse> studentResponseList = new ArrayList<>();
+        studentList.stream().forEach(student -> studentResponseList.add(new StudentResponse(student)));
+        return studentResponseList;
+    }
 }

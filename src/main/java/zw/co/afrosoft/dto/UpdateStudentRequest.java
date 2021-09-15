@@ -14,4 +14,6 @@ public class UpdateStudentRequest {
     private String firstname;
     private String lastname;
     private String email;
+    private String street;
+    private String city;
 }

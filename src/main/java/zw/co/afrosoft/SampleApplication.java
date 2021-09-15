@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @SpringBootApplication
 @EntityScan("zw.co.afrosoft.domain")
 @EnableJpaRepositories(value = "zw.co.afrosoft.persistence")
+//@EnableSwagger2
 public class SampleApplication {
 
     public static void main(String[] args) {

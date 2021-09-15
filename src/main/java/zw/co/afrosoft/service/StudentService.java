@@ -75,4 +75,8 @@ public class StudentService {
         Pageable pageable = PageRequest.of(pageNo-1,pageSize);
        return studentRepository.findAll(pageable).getContent();
     }
+
+    public List<Student> getStudentByCity(String city){
+        return studentRepository.getStudentsByCity(city);
+    }
 }

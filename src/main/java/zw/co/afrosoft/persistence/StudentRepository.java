@@ -24,4 +24,7 @@ public interface StudentRepository extends JpaRepository<Student,Long> {
         DELETE
      */
 
+    @Query("FROM Student s INNER JOIN Address a on a.id=s.id WHERE a.city=:city")
+    List<Student> getStudentsByCity(String city);
+
 }

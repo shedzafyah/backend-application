@@ -1,5 +1,7 @@
 package zw.co.afrosoft.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import zw.co.afrosoft.domain.Student;
@@ -16,12 +18,20 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/student")
 public class StudentController {
-
     @Autowired
     StudentService studentService;
 
+    Logger logger = LoggerFactory.getLogger(StudentController.class);
+
+
     @GetMapping("/getAll")
     public List<StudentResponse> getAllStudents(){
+
+        logger.warn("Inside Warning");
+        logger.error("Inside Error");
+        logger.info("Inside Info");
+        logger.trace("Inside Trace");
+        logger.debug("Inside Debug");
 
         List<Student> studentList = studentService.getAllStudent();
         List<StudentResponse> studentResponseList = new ArrayList<>();

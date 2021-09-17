@@ -7,12 +7,14 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import zw.co.afrosoft.domain.Address;
 import zw.co.afrosoft.domain.Student;
+import zw.co.afrosoft.domain.Subject;
 import zw.co.afrosoft.dto.InQueryRequest;
 import zw.co.afrosoft.dto.StudentRequest;
 import zw.co.afrosoft.dto.StudentResponse;
 import zw.co.afrosoft.dto.UpdateStudentRequest;
 import zw.co.afrosoft.persistence.AddressRepository;
 import zw.co.afrosoft.persistence.StudentRepository;
+import zw.co.afrosoft.persistence.SubjectRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,18 +28,36 @@ public class StudentService {
     @Autowired
     AddressRepository addressRepository;
 
+    @Autowired
+    SubjectRepository subjectRepository;
+
     public List<Student> getAllStudent(){
         return studentRepository.findAll();
     }
 
     public Student createStudent(StudentRequest studentRequest){
         Student student= new Student(studentRequest);
+
         Address address = new Address();
         address.setCity(studentRequest.getCity());
         address.setStreet(studentRequest.getStreet());
         addressRepository.save(address);
         student.setAddress(address);
         studentRepository.save(student);
+
+        List<Subject> subjectList = new ArrayList<>();
+
+        if (studentRequest.getSubjects()!=null){
+            for (Subject studentReq: studentRequest.getSubjects()) {
+                Subject subject = new Subject();
+                subject.setSubjectName(studentReq.getSubjectName());
+                subject.setMarkObtained(studentReq.getMarkObtained());
+                subject.setStudent(student);
+                subjectList.add(subject);
+            }
+
+        }
+        subjectRepository.saveAll(subjectList);
         return student;
     }
     public Student updateStudent(UpdateStudentRequest updateStudentRequest){

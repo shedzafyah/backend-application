@@ -27,11 +27,14 @@ public class StudentController {
     @GetMapping("/getAll")
     public List<StudentResponse> getAllStudents(){
 
+        /*
+      
         logger.warn("Inside Warning");
         logger.error("Inside Error");
         logger.info("Inside Info");
         logger.trace("Inside Trace");
         logger.debug("Inside Debug");
+         */
 
         List<Student> studentList = studentService.getAllStudent();
         List<StudentResponse> studentResponseList = new ArrayList<>();

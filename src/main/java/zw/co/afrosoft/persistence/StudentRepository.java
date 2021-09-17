@@ -14,10 +14,13 @@ public interface StudentRepository extends JpaRepository<Student,Long> {
 
     List<Student> findStudentByFirstnameAndLastname(String firstname,String Lastname);
 
-    List<Student> findStudentByFirstnameIn(List<String> firstnames);
+    List<Student> findStudentByFirstnameIn(List<String>  firstnames);
 
     @Query("FROM Student Where firstname=:firstname AND lastname=:lastname")
     List<Student> getByFirstNameAndLastname(String firstname,String lastname);
+
+    @Query("FROM Student WHERE email=:email")
+    Student deleteStudentByEmail(String email);
 
     /*
         UPDATE
